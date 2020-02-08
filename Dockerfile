@@ -1,16 +1,16 @@
-FROM ubuntu:16.04
-MAINTAINER Charlie Bruce <charliebruce@gmail.com>
+FROM ubuntu
+MAINTAINER Memiks <contact@memiks.fr>
 
 # Download tools and prerequisites
-RUN apt-key update && \
-apt-get update && \
-apt-get install -y curl git unzip bzip2 build-essential gcc-multilib srecord pkg-config python libusb-1.0.0 && \
-apt-get clean all
+RUN apt-key update && apt-get update \
+  && apt-get install -y curl git unzip bzip2 build-essential gcc-multilib srecord pkg-config python libusb-1.0.0 \
+  && apt-get clean all \
+  && rm -rf /var/lib/apt/lists/*
 
 # Download and install ARM toolchain matching the SDK
-RUN curl -SL https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2?revision=bc2c96c0-14b5-4bb4-9f18-bceb4050fee7?product=GNU%20Arm%20Embedded%20Toolchain,64-bit,,Linux,7-2018-q2-update > /tmp/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2 && \
-tar xvjf /tmp/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2 -C /usr/local/ && \
-rm /tmp/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2
+RUN curl -SL https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 > /tmp/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 && \
+tar xvjf /tmp/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 -C /usr/local/ && \
+rm /tmp/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
 
 # Download NRF5 SDK v16.0.0 and extract nRF5 SDK to /nrf5/nRF5_SDK_16.0.0
 RUN curl -SL https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v16.x.x/nRF5_SDK_16.0.0_98a08e2.zip > /tmp/SDK_16.0.0.zip && \
