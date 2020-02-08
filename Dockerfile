@@ -2,7 +2,7 @@ FROM ubuntu
 MAINTAINER Memiks <contact@memiks.fr>
 
 # Download tools and prerequisites
-RUN apt-key update && apt-get update \
+RUN apt-get update \
   && apt-get install -y curl git unzip bzip2 build-essential gcc-multilib srecord pkg-config python libusb-1.0.0 \
   && apt-get clean all \
   && rm -rf /var/lib/apt/lists/*
